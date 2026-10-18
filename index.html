@@ -585,7 +585,7 @@ footer p.org b { margin-right: 8px; }
 </div>
 
 <script src="assets/map.js?v=20261018"></script>
-<script src="data.js?v=20261018g"></script>
+<script src="data.js?v=20261018h"></script>
 <script>
 (() => {
   const D = window.SG, M = window.SG_MAP;
@@ -1004,7 +1004,7 @@ footer p.org b { margin-right: 8px; }
       <p class="en">${esc(D.en)}</p>
       <div class="m"><b>指導單位</b>　${esc(D.guide)}<br><b>執行單位</b>　${esc(D.host)}<br><b>參訪成員</b>　${esc(D.memberLine)}<br><b>參訪對象</b>　教育部、國立教育學院、中小學、理工學院、幼教師培機構</div>
       <div class="s-logos">${uniqUnits.map(k => `<span class="logo-chip">${logoHTML(D.units[k].logo, null, D.units[k].zh)}</span>`).join("")}</div>
-    </div><div class="photo"><img src="${img("sg4-714")}" alt="參訪團合影"></div></div></section>`);
+    </div><div class="photo"><img src="${img("sg1-386")}" alt="參訪團啟程合影"></div></div></section>`);
   slides.push(`<section class="slide" data-map style="--c:#2F6DB5"><div class="s-k">ROUTE MAP</div><h2>五天的參訪路線</h2><div class="s-map map-card" id="slideMap"></div>${foot("")}</section>`);
   D.days.forEach(d => {
     const us = unitsByDay(d.n), ph = D.photos[d.n];

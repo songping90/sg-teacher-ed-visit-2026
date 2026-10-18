@@ -558,7 +558,7 @@ footer p.org b { margin-right: 8px; }
 </main>
 
 <section class="wrap notice-wrap">
-  <div class="notice" role="note"><span class="ic" aria-hidden="true">⚠️</span><div><b>肖像權與使用範圍聲明</b><p data-notice></p></div></div>
+  <div class="notice" role="note"><span class="ic" aria-hidden="true">⚠️</span><div><b>使用範圍聲明</b><p data-notice></p></div></div>
 </section>
 
 <footer>
@@ -585,7 +585,7 @@ footer p.org b { margin-right: 8px; }
 </div>
 
 <script src="assets/map.js?v=20261018"></script>
-<script src="data.js?v=20261018f"></script>
+<script src="data.js?v=20261018g"></script>
 <script>
 (() => {
   const D = window.SG, M = window.SG_MAP;
@@ -612,7 +612,7 @@ footer p.org b { margin-right: 8px; }
   const GROUP = { moe: ["教育部長官", "#2F6DB5"], prof: ["師資培育大學", "#0E8C7E"], staff: ["計畫團隊", "#7356B0"] };
   $("#memberList").innerHTML = D.members.map(m => `<div class="member rv" style="--c:${GROUP[m.g][1]}"><img class="av" src="assets/members/${m.name}.webp?v=2" alt="${esc(m.name)}虛擬圖像" width="240" height="240" loading="lazy"><div><b>${esc(m.name)}</b><span class="tt">${esc(m.title)}</span><small>${esc(m.org)}</small></div></div>`).join("");
   document.querySelectorAll("[data-notice]").forEach(el => el.textContent = D.notice);
-  const heroPics = [["sg4-714", 4, "團員於藝術科學博物館旁合影"], ["sg1-386", 1, "參訪團啟程"], ["sg3-merlion", 3, "第三天團員合影"]];
+  const heroPics = [["sg1-386", 1, "參訪團啟程"], ["sg4-714", 4, "團員於藝術科學博物館旁合影"], ["sg3-merlion", 3, "第三天團員合影"]];
   const allPhotos = [];
   const addPhoto = (f, c) => { allPhotos.push({ f, c }); return allPhotos.length - 1; };
   $("#heroCollage").innerHTML = heroPics.map(([f, n, c]) => {

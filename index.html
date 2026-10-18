@@ -275,6 +275,30 @@ section.block { padding: 64px 0 24px; }
 .notice b { color: var(--title); font-size: 16px; }
 .notice p { margin: 4px 0 0; font-size: 15px; line-height: 1.75; }
 .s-end p.s-notice { font-size: 18px; max-width: 1100px; margin: 26px auto 0; line-height: 1.6; color: var(--mute); border-top: 1px solid var(--line); padding-top: 16px; }
+.sum { display: grid; gap: 18px; }
+.sum-ben { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sum-ben div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.sum-ben b { display: block; font-size: 26px; font-weight: 900; color: var(--title); line-height: 1.2; }
+.sum-ben span { font-size: 14px; color: var(--mute); }
+.sum-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px 24px; }
+.sum-card h3 { margin: 0 0 12px; font-size: 20px; color: var(--title); }
+.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.cmp .c { padding: 12px 14px; font-size: 15.5px; border-top: 1px solid var(--line); }
+.cmp .c:nth-child(-n+2) { border-top: 0; }
+.cmp .c.sg { background: color-mix(in srgb, #C2416B 6%, var(--paper)); border-right: 1px solid var(--line); }
+.cmp .c i { display: inline-block; font-style: normal; font-size: 12.5px; font-weight: 900; color: #fff; border-radius: 999px; padding: 1px 10px; margin-right: 8px; vertical-align: 1px; }
+.cmp .c.sg i { background: #C2416B; } .cmp .c.tw i { background: #2F6DB5; }
+.dirs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.dir { border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 14px; padding: 16px; background: var(--paper); }
+.dir .n { font-size: 13px; font-weight: 900; color: var(--c-acc); letter-spacing: .08em; }
+.dir h4 { margin: 4px 0 6px; font-size: 19px; color: var(--title); }
+.dir p { margin: 0 0 10px; font-size: 15px; }
+.dir ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--mute); }
+.dir a { color: inherit; }
+.part-break { margin-top: 72px; padding: 34px 0 6px; border-top: 2px dashed var(--line); }
+.part-break h2 { margin: 4px 0 6px; font-size: 30px; color: var(--title); font-weight: 900; }
+.part-break p { margin: 0; color: var(--mute); }
+@media (max-width: 860px) { .sum-ben { grid-template-columns: repeat(2, 1fr); } .dirs { grid-template-columns: 1fr; } .cmp { grid-template-columns: 1fr; } .cmp .c.sg { border-right: 0; } .cmp .c:nth-child(2) { border-top: 1px solid var(--line); } }
 footer { margin-top: 32px; background: var(--paper); border-top: 1px solid var(--line); padding: 28px 0; font-size: 14px; color: var(--mute); }
 footer .wrap { display: flex; gap: 16px; align-items: center; }
 footer img { width: 56px; height: 56px; }
@@ -367,6 +391,27 @@ footer p.org b { margin-right: 8px; }
 .s-lessons .lesson h3 { font-size: 32px; margin-bottom: 12px; }
 .s-lessons .lesson p { font-size: 25px; line-height: 1.6; }
 .s-lessons .lesson::before { font-size: 64px; }
+.s-ben { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 30px; }
+.s-ben div { background: var(--zebra); border-radius: 18px; padding: 20px 24px; }
+.s-ben b { display: block; font-size: 46px; font-weight: 900; color: var(--title); line-height: 1.15; }
+.s-ben span { font-size: 21px; color: var(--mute); line-height: 1.45; }
+.s-sub { font-size: 30px; color: var(--title); margin: 8px 0 16px; }
+.s-cmp { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.s-cmp .c { padding: 24px 26px; font-size: 27px; line-height: 1.6; border-top: 1px solid var(--line); }
+.s-cmp .c:nth-child(-n+2) { border-top: 0; }
+.s-cmp .c.sg { background: color-mix(in srgb, #C2416B 6%, var(--paper)); border-right: 1px solid var(--line); }
+.s-cmp .c i { display: inline-block; font-style: normal; font-size: 17px; font-weight: 900; color: #fff; border-radius: 999px; padding: 2px 14px; margin-right: 10px; vertical-align: 3px; }
+.s-cmp .c.sg i { background: #C2416B; } .s-cmp .c.tw i { background: #2F6DB5; }
+.s-dirs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 20px; }
+.s-dirs .dir { padding: 34px 32px; border-top-width: 10px; display: flex; flex-direction: column; }
+.s-dirs .dir .n { font-size: 20px; }
+.s-dirs .dir ul { margin-top: 8px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--ink); }
+.s-dirs .dir h4 { font-size: 34px; margin: 8px 0 18px; line-height: 1.3; }
+.s-dirs .dir p { font-size: 27px; line-height: 1.65; margin-bottom: 20px; }
+.s-dirs .dir ul { font-size: 24px; line-height: 1.75; padding-left: 28px; }
+.s-part { height: 100%; display: flex; flex-direction: column; justify-content: center; padding-left: 40px; border-left: 10px solid var(--brand); }
+.s-part h2 { font-size: 72px; margin: 10px 0 14px; }
+.s-part p { font-size: 30px; color: var(--mute); margin: 0; }
 .s-end { height: 100%; display: grid; place-items: center; text-align: center; }
 .s-end h2 { font-size: 60px; margin-bottom: 14px; }
 .s-end p { font-size: 26px; color: var(--mute); margin: 0; }
@@ -452,11 +497,11 @@ footer p.org b { margin-right: 8px; }
       <span><b>2026 新加坡師培學術參訪</b><small>數位科技轉化大學師培課程培訓計畫</small></span>
     </a>
     <nav class="topnav" aria-label="頁內導覽">
-      <a href="#members">成員</a>
+      <a href="#summary">重點摘要</a>
+      <a href="#lessons">對臺灣的啟示</a>
+      <a href="#themes">共同主題</a>
       <a href="#route">參訪路線</a>
       <a href="#days">每日紀錄</a>
-      <a href="#themes">共同主題</a>
-      <a href="#lessons">對臺灣的啟示</a>
     </nav>
     <button class="btn icon-btn" id="themeBtn" type="button" aria-label="切換深淺色" title="切換深淺色">🌓</button>
     <button class="btn primary" type="button" data-show><span aria-hidden="true">▶</span><span class="hide-sm">簡報模式</span></button>
@@ -479,13 +524,47 @@ footer p.org b { margin-right: 8px; }
         </div>
         <div class="hero-cta">
           <button class="btn primary" type="button" data-show>▶ 簡報模式播放</button>
-          <a class="btn" href="#route">看參訪路線 ↓</a>
+          <a class="btn" href="#summary">看重點摘要 ↓</a>
         </div>
       </div>
       <div>
         <div class="collage" id="heroCollage"></div>
         <div class="logo-strip" id="logoStrip" aria-label="參訪機構"></div>
       </div>
+    </div>
+  </section>
+
+  <section class="block" id="summary">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="eyebrow">EXECUTIVE SUMMARY</div>
+        <h2>重點摘要</h2>
+        <p>先看結論：這次參訪看到什麼、和臺灣有何不同、可以往哪三個方向推動。</p>
+      </div>
+      <div class="sum rv" id="sumBox"></div>
+    </div>
+  </section>
+
+  <section class="block" id="lessons">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="eyebrow">IMPLICATIONS FOR TAIWAN</div>
+        <h2>對臺灣師培的啟示</h2>
+        <p>第五天師長綜合反思座談中提出的六項觀察與構想，對應摘要中的三個方向。</p>
+      </div>
+      <div class="lessons" id="lessonList"></div>
+      <p class="src-note">資料來源：參訪團每日交流日誌、參訪單位介紹與學習重點、師長綜合討論紀錄。</p>
+    </div>
+  </section>
+
+  <section class="block" id="themes">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="eyebrow">CROSS-CUTTING THEMES</div>
+        <h2>跨日的共同主題</h2>
+        <p>把五天放在一起看，有四個主題反覆出現。色塊標示出現在哪幾天。</p>
+      </div>
+      <div class="themes" id="themeList"></div>
     </div>
   </section>
 
@@ -520,29 +599,6 @@ footer p.org b { margin-right: 8px; }
       </div>
       <nav class="day-tabs" id="dayTabs" aria-label="跳到某一天"></nav>
       <div id="dayList"></div>
-    </div>
-  </section>
-
-  <section class="block" id="themes">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="eyebrow">CROSS-CUTTING THEMES</div>
-        <h2>跨日的共同主題</h2>
-        <p>把五天放在一起看，有四個主題反覆出現。色塊標示出現在哪幾天。</p>
-      </div>
-      <div class="themes" id="themeList"></div>
-    </div>
-  </section>
-
-  <section class="block" id="lessons">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="eyebrow">IMPLICATIONS FOR TAIWAN</div>
-        <h2>對臺灣師培的啟示</h2>
-        <p>第五天的師長綜合反思座談中，與會師長提出的觀察與構想。</p>
-      </div>
-      <div class="lessons" id="lessonList"></div>
-      <p class="src-note">資料來源：參訪團每日交流日誌、參訪單位介紹與學習重點、師長綜合討論紀錄。</p>
     </div>
   </section>
 
@@ -585,7 +641,7 @@ footer p.org b { margin-right: 8px; }
 </div>
 
 <script src="assets/map.js?v=20261018"></script>
-<script src="data.js?v=20261018h"></script>
+<script src="data.js?v=20261018j"></script>
 <script>
 (() => {
   const D = window.SG, M = window.SG_MAP;
@@ -752,7 +808,7 @@ footer p.org b { margin-right: 8px; }
       cancelAnimationFrame(camRaf); clearTimeout(camT);
       fitSvg();
       if (!isFollow()) { if (cam.w !== W || cam.h !== H) applyCam(FULL0); return; }
-      if (reduce || dur <= 0) { applyCam(target); return; }
+      if (dur <= 0) { applyCam(target); return; }
       const s = { ...cam }, t0 = performance.now();
       const step = now => { const e0 = Math.min(1, Math.max(0, (now - t0) / dur)), e = 1 - Math.pow(1 - e0, 3); applyCam(lerpCam(s, target, e)); if (e0 < 1) camRaf = requestAnimationFrame(step); else clearTimeout(camT); };
       camRaf = requestAnimationFrame(step);
@@ -851,7 +907,7 @@ footer p.org b { margin-right: 8px; }
     }
     function fly(path, dur, done) {
       card.classList.add("hide");
-      animPath(path, reduce ? 1 : dur, (pt, ang) => { setVeh(pt.x, pt.y, { mode: "plane", angle: ang, color: DAY[1].color }); camFollow(pt.x, pt.y); }, done);
+      animPath(path, dur, (pt, ang) => { setVeh(pt.x, pt.y, { mode: "plane", angle: ang, color: DAY[1].color }); camFollow(pt.x, pt.y); }, done);
     }
     const card = host.querySelector(".now-card");
     const btnPlay = host.querySelector('[data-act="play"]');
@@ -871,7 +927,7 @@ footer p.org b { margin-right: 8px; }
       const sideEl = host.querySelector(".stop-list"), cb = listBtns[i];
       if (cb && sideEl.scrollHeight > sideEl.clientHeight + 4) {
         const top = cb.closest("li").offsetTop - sideEl.clientHeight / 2 + cb.offsetHeight / 2;
-        sideEl.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+        sideEl.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       }
       if (i < 0) { card.classList.add("hide"); setVeh(0, 0, { mode: "none" }); camTo(fullCam(), 900); return; }
       const s = stops[i];
@@ -881,7 +937,7 @@ footer p.org b { margin-right: 8px; }
       setVeh(s.xy[0], s.xy[1], { mode: "bus", big: true, color: s.color, off: parkSpot(i) });
     }
     function moveTo(i, done) {
-      const k = i - 1, l = legEls[k], L = lens[k], t0 = performance.now(), dur = reduce || L < 2 ? 1 : 1500, my = token;
+      const k = i - 1, l = legEls[k], L = lens[k], t0 = performance.now(), dur = L < 2 ? 1 : 1500, my = token;
       card.classList.add("hide");
       veh.style.setProperty("--tc", stops[i].color);
       let fin = false;
@@ -927,17 +983,17 @@ footer p.org b { margin-right: 8px; }
   }
 
   const mainMap = createMap($("#mainMap"));
-  if (reduce) mainMap.showAll();
-  else {
+  // 地圖動畫是主要內容：即使裝置開啟「減少動態效果」也照常輪播（使用者 10-18 要求手機一定要自動播放）
+  {
     // 進入畫面就輪播，離開畫面暫停；使用者按暫停或點清單後不再自動播放
     let userHold = false;
     $("#mainMap").addEventListener("click", e => { if (e.target.closest(".stop-list button") || (e.target.closest('[data-act]') && mainMap.playing)) userHold = true; else if (e.target.closest('[data-act="play"]')) userHold = false; }, true);
-    const io = new IntersectionObserver(es => es.forEach(e => {
+    const io = "IntersectionObserver" in window && new IntersectionObserver(es => es.forEach(e => {
       if (e.isIntersecting) { if (!userHold && !mainMap.playing) mainMap.play(); }
       else if (mainMap.playing) mainMap.stop();
-    }), { threshold: .5 });
+    }), { threshold: .3 });
     // 只看地圖本身是否進入畫面（手機上整張卡片含清單太長，看整張卡永遠到不了門檻）
-    io.observe($("#mainMap .map-stage"));
+    if ("IntersectionObserver" in window) io.observe($("#mainMap .map-stage")); else mainMap.play();
   }
 
   /* ===== 每日 ===== */
@@ -967,6 +1023,12 @@ footer p.org b { margin-right: 8px; }
   }).join("");
 
   $("#themeList").innerHTML = D.themes.map(t => `<div class="theme rv"><div class="ic" aria-hidden="true">${t.icon}</div><h3>${esc(t.t)}</h3><p>${esc(t.d)}</p><div class="dchips">${t.days.map(n => `<span style="background:${DAY[n].color}" title="${esc(DAY[n].theme)}">DAY ${n}</span>`).join("")}</div></div>`).join("");
+  const DIRC = ["#2F6DB5", "#0E8C7E", "#7356B0"];
+  const S = D.summary;
+  const cmpHTML = `<div class="cmp">${S.compare.map(c => `<div class="c sg"><i>新加坡</i>${esc(c.sg)}</div><div class="c tw"><i>臺灣</i>${esc(c.tw)}</div>`).join("")}</div>`;
+  $("#sumBox").innerHTML = `<div class="sum-ben">${S.benefits.map(b => `<div><b>${esc(b.b)}</b><span>${esc(b.t)}</span></div>`).join("")}</div>
+    <div class="sum-card"><h3>新加坡與臺灣的對照</h3>${cmpHTML}</div>
+    <div class="sum-card"><h3>三個可借鏡的推動方向</h3><div class="dirs">${S.directions.map((d, k) => `<div class="dir" style="--c:${DIRC[k]}"><div class="n">方向 ${k + 1}</div><h4>${d.icon} ${esc(d.t)}</h4><p>${esc(d.d)}</p><ul>${d.lessons.map(n => `<li><a href="#lessons">${esc(D.lessons[n].t)}</a></li>`).join("")}</ul></div>`).join("")}</div></div>`;
   $("#lessonList").innerHTML = D.lessons.map(l => `<div class="lesson rv"><h3>${esc(l.t)}</h3><p>${esc(l.d)}</p></div>`).join("");
   $("#padletBtn").href = D.padlet;
 
@@ -1005,6 +1067,16 @@ footer p.org b { margin-right: 8px; }
       <div class="m"><b>指導單位</b>　${esc(D.guide)}<br><b>執行單位</b>　${esc(D.host)}<br><b>參訪成員</b>　${esc(D.memberLine)}<br><b>參訪對象</b>　教育部、國立教育學院、中小學、理工學院、幼教師培機構</div>
       <div class="s-logos">${uniqUnits.map(k => `<span class="logo-chip">${logoHTML(D.units[k].logo, null, D.units[k].zh)}</span>`).join("")}</div>
     </div><div class="photo"><img src="${img("sg1-386")}" alt="參訪團啟程合影"></div></div></section>`);
+  const SX = D.summary;
+  slides.push(`<section class="slide" style="--c:#2F6DB5"><div class="s-k">EXECUTIVE SUMMARY</div><h2>重點摘要</h2>
+    <div class="s-ben">${SX.benefits.map(b => `<div><b>${esc(b.b)}</b><span>${esc(b.t)}</span></div>`).join("")}</div>
+    <h3 class="s-sub">新加坡與臺灣的對照</h3>
+    <div class="s-cmp">${SX.compare.map(c => `<div class="c sg"><i>新加坡</i>${esc(c.sg)}</div><div class="c tw"><i>臺灣</i>${esc(c.tw)}</div>`).join("")}</div>${foot("")}</section>`);
+  slides.push(`<section class="slide" style="--c:#2F6DB5"><div class="s-k">EXECUTIVE SUMMARY</div><h2>三個可借鏡的推動方向</h2>
+    <div class="s-dirs">${SX.directions.map((d, k) => `<div class="dir" style="--c:${DIRC[k]}"><div class="n">方向 ${k + 1}</div><h4>${d.icon} ${esc(d.t)}</h4><p>${esc(d.d)}</p><ul>${d.lessons.map(n => `<li>${esc(D.lessons[n].t)}</li>`).join("")}</ul></div>`).join("")}</div>${foot("")}</section>`);
+  slides.push(`<section class="slide" style="--c:#C2416B"><div class="s-k">IMPLICATIONS FOR TAIWAN</div><h2>對臺灣師培的啟示</h2><div class="s-lessons">${D.lessons.map(l => `<div class="lesson"><h3>${esc(l.t)}</h3><p>${esc(l.d)}</p></div>`).join("")}</div>${foot("")}</section>`);
+  slides.push(`<section class="slide" style="--c:#2F6DB5"><div class="s-k">CROSS-CUTTING THEMES</div><h2>跨日的共同主題</h2><div class="s-themes">${D.themes.map(t => `<div class="theme"><h3>${t.icon} ${esc(t.t)}</h3><p>${esc(t.d)}</p><div class="dchips">${t.days.map(n => `<span style="background:${DAY[n].color}">D${n}</span>`).join("")}</div></div>`).join("")}</div>${foot("")}</section>`);
+  slides.push(`<section class="slide" style="--c:#2F6DB5"><div class="s-part"><div class="s-k">EVIDENCE &amp; ITINERARY</div><h2>參訪實證與行程紀錄</h2><p>五天路線與每日交流重點</p></div>${foot("")}</section>`);
   slides.push(`<section class="slide" data-map style="--c:#2F6DB5"><div class="s-k">ROUTE MAP</div><h2>五天的參訪路線</h2><div class="s-map map-card" id="slideMap"></div>${foot("")}</section>`);
   D.days.forEach(d => {
     const us = unitsByDay(d.n), ph = D.photos[d.n];
@@ -1018,8 +1090,6 @@ footer p.org b { margin-right: 8px; }
         <div class="sub">${ph.slice(1, 3).map(p => `<div><img src="${img(p.f)}" alt=""><div class="cap">${esc(p.c)}</div></div>`).join("")}</div></div>
       </div>${foot("")}</section>`);
   });
-  slides.push(`<section class="slide" style="--c:#2F6DB5"><div class="s-k">CROSS-CUTTING THEMES</div><h2>跨日的共同主題</h2><div class="s-themes">${D.themes.map(t => `<div class="theme"><h3>${t.icon} ${esc(t.t)}</h3><p>${esc(t.d)}</p><div class="dchips">${t.days.map(n => `<span style="background:${DAY[n].color}">D${n}</span>`).join("")}</div></div>`).join("")}</div>${foot("")}</section>`);
-  slides.push(`<section class="slide" style="--c:#C2416B"><div class="s-k">IMPLICATIONS FOR TAIWAN</div><h2>對臺灣師培的啟示</h2><div class="s-lessons">${D.lessons.map(l => `<div class="lesson"><h3>${esc(l.t)}</h3><p>${esc(l.d)}</p></div>`).join("")}</div>${foot("")}</section>`);
   slides.push(`<section class="slide" style="--c:#2F6DB5"><div class="s-end"><div><div class="mv end-mv"><div class="mv-blob"></div><video muted loop playsinline autoplay preload="auto" poster="assets/mascot-poster.jpg"><source src="assets/mascot.mp4" type="video/mp4"></video></div><h2>謝謝聆聽</h2><p class="s-org">指導單位：${esc(D.guide)}　執行單位：${esc(D.host)}</p><p>© 2026 陳佩英教授計畫團隊・數位科技轉化大學師培課程培訓計畫</p><p class="s-notice">${esc(D.notice)}</p></div></div></section>`);
 
   const canvas = $("#canvas"), show = $("#show");
@@ -1034,7 +1104,7 @@ footer p.org b { margin-right: 8px; }
     $("#sNum").textContent = `${si + 1} / ${sEls.length}`;
     if (sEls[si].dataset.map !== undefined) {
       if (!slideMap) slideMap = createMap($("#slideMap"));
-      slideMap.reset(); reduce ? slideMap.showAll() : setTimeout(() => slideMap.play(), 500);
+      slideMap.reset(); setTimeout(() => slideMap.play(), 500);
     } else if (slideMap) slideMap.stop();
     try { history.replaceState(null, "", "#slide=" + (si + 1)); } catch (e) {}
   };

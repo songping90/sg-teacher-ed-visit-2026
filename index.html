@@ -87,7 +87,26 @@ button { font: inherit; color: inherit; }
 .hero .wrap { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; padding-top: 52px; padding-bottom: 52px; }
 .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--brand); background: color-mix(in srgb, var(--brand) 10%, var(--paper)); padding: 6px 14px; border-radius: 999px; }
 .hero h1 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.22; color: var(--title); margin: 18px 0 8px; font-weight: 900; letter-spacing: .02em; }
-.hero h1 em { font-style: normal; color: var(--brand); }
+.hero h1 em, .s-cover h1 em {
+  font-style: normal;
+  background-image: linear-gradient(100deg,
+    var(--title) 0%,
+    var(--brand) 22%,
+    color-mix(in srgb, var(--brand) 72%, var(--paper)) 38%,
+    var(--brand) 54%,
+    var(--brand) 78%,
+    var(--title) 100%);
+  background-size: 200% 100%; background-repeat: repeat;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: flowGrad 3s linear infinite; }
+@keyframes flowGrad { from { background-position: 0 50%; } to { background-position: -200% 50%; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 em, .s-cover h1 em { animation: none; background-image: none; -webkit-text-fill-color: var(--brand); color: var(--brand); }
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero h1 em, .s-cover h1 em { background-image: none; -webkit-text-fill-color: var(--brand); color: var(--brand); }
+}
 .hero .en { font-size: 15px; color: var(--mute); font-style: italic; margin: 0 0 16px; }
 .hero .lead { font-size: 18px; color: var(--ink); margin: 0 0 22px; max-width: 34em; }
 .meta { display: grid; gap: 6px; margin: 0 0 22px; font-size: 15px; color: var(--mute); }
@@ -337,7 +356,6 @@ footer p.org b { margin-right: 8px; }
 .s-foot img { width: 30px; height: 30px; }
 .s-cover { display: grid; grid-template-columns: 1fr 640px; gap: 50px; align-items: center; height: 100%; }
 .s-cover h1 { font-size: 70px; line-height: 1.18; margin: 18px 0 12px; color: var(--title); font-weight: 900; }
-.s-cover h1 em { font-style: normal; color: var(--brand); }
 .s-cover .en { font-size: 24px; color: var(--mute); font-style: italic; margin: 0 0 26px; }
 .s-cover .m { font-size: 25px; line-height: 1.7; }
 .s-cover .m b { color: var(--title); }

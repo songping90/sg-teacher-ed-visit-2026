@@ -225,7 +225,7 @@ section.block { padding: 64px 0 24px; }
 @keyframes dotPulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--c) 10%, transparent); } }
 
 /* 每日 */
-.day-tabs { display: flex; gap: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: 18px; position: sticky; top: 64px; z-index: 20; padding: 10px 0; background: var(--ground); }
+.day-tabs { display: flex; gap: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: 18px; position: sticky; top: var(--hdr, 64px); z-index: 20; padding: 10px 0; background: var(--ground); transition: top .28s ease; }
 .day-tabs a { flex: none; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 6px 14px; font-size: 15px; font-weight: 700; color: var(--title); }
 .day-tabs a i { font-style: normal; color: var(--c-acc); }
 .day-tabs a:hover, .day-tabs a.cur { border-color: var(--c); background: var(--c-soft); }
@@ -503,6 +503,31 @@ footer p.org b { margin-right: 8px; }
   .mv-blob, .stop-list button.cur .dot { animation: none; }
   .slide.cur { animation: none; }
 }
+
+/* ===== 動態效果：導覽列收合、時間軸、進場節奏、燈箱 ===== */
+.topbar { transition: transform .28s ease; will-change: transform; }
+.js.nav-hide .topbar { transform: translateY(-101%); }
+.js .rv { transition-delay: calc(min(var(--i, 0), 6) * 55ms); }
+#dayList { position: relative; }
+.tl-row { position: relative; }
+.tl-line, .tl-fill { display: none; }
+@media (min-width: 900px) {
+  #dayList { padding-left: 40px; }
+  .tl-line, .tl-fill { display: block; position: absolute; left: 11px; width: 3px; border-radius: 3px; }
+  .tl-line { top: 10px; bottom: 34px; background: var(--line); }
+  .tl-fill { top: 10px; height: 0; background: linear-gradient(180deg, var(--brand), var(--title)); transition: height .18s linear; }
+  .tl-row::before { content: ""; position: absolute; left: -35px; top: 44px; width: 13px; height: 13px; border-radius: 50%;
+    background: var(--paper); border: 3px solid var(--line); box-shadow: 0 0 0 4px var(--ground);
+    transition: border-color .45s ease, transform .45s ease; }
+  .tl-row.lit::before { border-color: var(--c, var(--brand)); transform: scale(1.18); }
+}
+.lb.open { animation: lbIn .24s ease both; }
+@keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .js.nav-hide .topbar { transform: none; }
+  .js .rv { transition-delay: 0s; }
+  .tl-fill, .lb.open { transition: none; animation: none; }
+}
 </style>
 </head>
 <body>
@@ -684,7 +709,7 @@ footer p.org b { margin-right: 8px; }
   $("#heroEn").textContent = D.en;
   $("#heroMeta").innerHTML = `<div><b>時間</b>${esc(D.dates)}</div><div><b>指導單位</b>${esc(D.guide)}</div><div><b>執行單位</b>${esc(D.host)}</div><div><b>成員</b>${esc(D.memberLine)}（<a href="#members">名單</a>）</div>`;
   const GROUP = { moe: ["教育部長官", "#2F6DB5"], prof: ["師資培育大學", "#0E8C7E"], staff: ["計畫團隊", "#7356B0"] };
-  $("#memberList").innerHTML = D.members.map(m => `<div class="member rv" style="--c:${GROUP[m.g][1]}"><img class="av" src="assets/members/${m.name}.webp?v=2" alt="${esc(m.name)}虛擬圖像" width="240" height="240" loading="lazy"><div><b>${esc(m.name)}</b><span class="tt">${esc(m.title)}</span><small>${esc(m.org)}</small></div></div>`).join("");
+  $("#memberList").innerHTML = D.members.map((m, mi) => `<div class="member rv" style="--c:${GROUP[m.g][1]};--i:${mi}"><img class="av" src="assets/members/${m.name}.webp?v=2" alt="${esc(m.name)}虛擬圖像" width="240" height="240" loading="lazy"><div><b>${esc(m.name)}</b><span class="tt">${esc(m.title)}</span><small>${esc(m.org)}</small></div></div>`).join("");
   document.querySelectorAll("[data-notice]").forEach(el => el.textContent = D.notice);
   const heroPics = [["sg1-386", 1, "參訪團啟程"], ["sg4-714", 4, "團員於藝術科學博物館旁合影"], ["sg3-merlion", 3, "第三天團員合影"]];
   const allPhotos = [];
@@ -1033,21 +1058,21 @@ footer p.org b { margin-right: 8px; }
       const i = addPhoto(p.f, `${dayLabel(d.n)}｜${p.c}`);
       return `<figure data-lb="${i}"><div class="ph"><img src="${imgS(p.f)}" alt="${esc(p.c)}" loading="lazy"></div><figcaption><b>${dayLabel(d.n)}</b>${esc(p.c)}</figcaption></figure>`;
     }).join("");
-    return `<article class="day rv" id="day${d.n}" style="--c:${d.color}">
+    return `<div class="tl-row" style="--c:${d.color}"><article class="day rv" id="day${d.n}" style="--c:${d.color}">
       <header class="day-head"><div class="day-no"><div><span>DAY</span><b>${d.n}</b></div></div>
         <div><div class="when">2026 年 ${d.date.replace("/", " 月 ")} 日（${d.wd}）・${esc(d.theme)}</div><h3>${d.n === 5 ? "綜整討論與返程" : us.map(u => esc(u.zh)).join("・")}</h3><p>${esc(d.summary)}</p></div></header>
       <div class="day-body"><div class="units">${units}</div><div class="gallery">${ph}</div></div>
-    </article>`;
+    </article></div>`;
   }).join("");
 
-  $("#themeList").innerHTML = D.themes.map(t => `<div class="theme rv"><div class="ic" aria-hidden="true">${t.icon}</div><h3>${esc(t.t)}</h3><p>${esc(t.d)}</p><div class="dchips">${t.days.map(n => `<span style="background:${DAY[n].color}" title="${esc(DAY[n].theme)}">DAY ${n}</span>`).join("")}</div></div>`).join("");
+  $("#themeList").innerHTML = D.themes.map((t, ti) => `<div class="theme rv" style="--i:${ti}"><div class="ic" aria-hidden="true">${t.icon}</div><h3>${esc(t.t)}</h3><p>${esc(t.d)}</p><div class="dchips">${t.days.map(n => `<span style="background:${DAY[n].color}" title="${esc(DAY[n].theme)}">DAY ${n}</span>`).join("")}</div></div>`).join("");
   const DIRC = ["#2F6DB5", "#0E8C7E", "#7356B0"];
   const S = D.summary;
   const cmpHTML = `<div class="cmp">${S.compare.map(c => `<div class="c sg"><i>新加坡</i>${esc(c.sg)}</div><div class="c tw"><i>臺灣</i>${esc(c.tw)}</div>`).join("")}</div>`;
   $("#sumBox").innerHTML = `<div class="sum-ben">${S.benefits.map(b => `<div><b>${esc(b.b)}</b><span>${esc(b.t)}</span></div>`).join("")}</div>
     <div class="sum-card"><h3>新加坡與臺灣的對照</h3>${cmpHTML}</div>
     <div class="sum-card"><h3>三個可借鏡的推動方向</h3><div class="dirs">${S.directions.map((d, k) => `<div class="dir" style="--c:${DIRC[k]}"><div class="n">方向 ${k + 1}</div><h4>${d.icon} ${esc(d.t)}</h4><p>${esc(d.d)}</p><ul>${d.lessons.map(n => `<li><a href="#lessons">${esc(D.lessons[n].t)}</a></li>`).join("")}</ul></div>`).join("")}</div></div>`;
-  $("#lessonList").innerHTML = D.lessons.map(l => `<div class="lesson rv"><h3>${esc(l.t)}</h3><p>${esc(l.d)}</p></div>`).join("");
+  $("#lessonList").innerHTML = D.lessons.map((l, le) => `<div class="lesson rv" style="--i:${le}"><h3>${esc(l.t)}</h3><p>${esc(l.d)}</p></div>`).join("");
   $("#padletBtn").href = D.padlet;
 
   /* 進場動畫：只對畫面外的元素加 pre，避免節流時內容看不到 */
@@ -1066,14 +1091,111 @@ footer p.org b { margin-right: 8px; }
   /* ===== 燈箱 ===== */
   const lb = $("#lb"); let li = 0;
   const lbShow = i => { li = (i + allPhotos.length) % allPhotos.length; $("#lbImg").src = img(allPhotos[li].f); $("#lbImg").alt = allPhotos[li].c; $("#lbTitle").textContent = allPhotos[li].c; };
-  document.addEventListener("click", e => { const f = e.target.closest("[data-lb]"); if (f) { lbShow(+f.dataset.lb); lb.classList.add("open"); $("#lbClose").focus(); } });
-  $("#lbClose").onclick = () => lb.classList.remove("open");
+  document.addEventListener("click", e => { const f = e.target.closest("[data-lb]"); if (f) { lbShow(+f.dataset.lb); lb.classList.add("open"); $("#lbClose").focus(); flipFrom(f.querySelector("img")); } });
+  $("#lbClose").onclick = () => closeLb();
   $("#lbPrev").onclick = () => lbShow(li - 1);
   $("#lbNext").onclick = () => lbShow(li + 1);
-  lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb-stage")) lb.classList.remove("open"); });
+  lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb-stage")) closeLb(); });
   let tx0 = null;
   lb.addEventListener("touchstart", e => tx0 = e.touches[0].clientX, { passive: true });
   lb.addEventListener("touchend", e => { if (tx0 == null) return; const dx = e.changedTouches[0].clientX - tx0; if (Math.abs(dx) > 50) lbShow(li + (dx < 0 ? 1 : -1)); tx0 = null; });
+
+  /* 燈箱：從縮圖原位置長大 */
+  let lbFrom = null;
+  function flipFrom(el) {
+    lbFrom = el || null;
+    if (reduce || !el) return;
+    const im = $("#lbImg");
+    const run = () => {
+      const a = el.getBoundingClientRect(), b = im.getBoundingClientRect();
+      if (!a.width || !b.width) return;
+      const dx = (a.left + a.width / 2) - (b.left + b.width / 2), dy = (a.top + a.height / 2) - (b.top + b.height / 2);
+      im.animate([{ transform: `translate(${dx}px,${dy}px) scale(${a.width / b.width},${a.height / b.height})`, opacity: .45 },
+                  { transform: "none", opacity: 1 }], { duration: 320, easing: "cubic-bezier(.2,.7,.3,1)" });
+    };
+    if (im.complete && im.naturalWidth) requestAnimationFrame(run);
+    else im.addEventListener("load", () => requestAnimationFrame(run), { once: true });
+  }
+  function closeLb() {
+    const im = $("#lbImg");
+    const back = (lbFrom && lbFrom.isConnected) ? lbFrom : document.querySelector(`[data-lb="${li}"] img`);
+    const r = back && back.getBoundingClientRect();
+    if (reduce || !r || !r.width || r.bottom < 0 || r.top > innerHeight) { lb.classList.remove("open"); lbFrom = null; return; }
+    const b = im.getBoundingClientRect();
+    if (!b.width) { lb.classList.remove("open"); lbFrom = null; return; }
+    const dx = (r.left + r.width / 2) - (b.left + b.width / 2), dy = (r.top + r.height / 2) - (b.top + b.height / 2);
+    const an = im.animate([{ transform: "none", opacity: 1 },
+                           { transform: `translate(${dx}px,${dy}px) scale(${r.width / b.width},${r.height / b.height})`, opacity: .3 }],
+                          { duration: 260, easing: "cubic-bezier(.4,0,.6,1)" });
+    lb.style.transition = "opacity .22s ease"; lb.style.opacity = "0";
+    an.onfinish = () => { lb.classList.remove("open"); lb.style.opacity = ""; lb.style.transition = ""; lbFrom = null; };
+  }
+
+  /* 數字捲到才累加 */
+  (function () {
+    const ns = [...document.querySelectorAll(".stats .stat b")];
+    if (!ns.length) return;
+    if (reduce || !("IntersectionObserver" in window)) return;
+    const run = el => {
+      const to = parseInt(el.textContent, 10);
+      if (!isFinite(to)) return;
+      const t0 = performance.now(), dur = 900;
+      el.style.fontVariantNumeric = "tabular-nums";
+      const step = t => {
+        const k = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(to * e);
+        if (k < 1) requestAnimationFrame(step); else el.textContent = to;
+      };
+      el.textContent = "0";
+      requestAnimationFrame(step);
+    };
+    const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { run(e.target); io2.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
+    ns.forEach(el => io2.observe(el));
+  })();
+
+  /* 每日紀錄的時間軸 */
+  (function () {
+    const list = $("#dayList");
+    if (!list) return;
+    const line = document.createElement("div"); line.className = "tl-line"; line.setAttribute("aria-hidden", "true");
+    const fill = document.createElement("div"); fill.className = "tl-fill"; fill.setAttribute("aria-hidden", "true");
+    list.append(line, fill);
+    const rows = [...list.querySelectorAll(".tl-row")];
+    let tick = false;
+    const draw = () => {
+      tick = false;
+      const r = list.getBoundingClientRect(), span = list.offsetHeight - 44;
+      fill.style.height = Math.max(0, Math.min(innerHeight * .55 - r.top - 10, span)) + "px";
+      rows.forEach(w => w.classList.toggle("lit", w.getBoundingClientRect().top < innerHeight * .62));
+    };
+    const on = () => { if (!tick) { tick = true; requestAnimationFrame(draw); } };
+    addEventListener("scroll", on, { passive: true });
+    addEventListener("resize", on);
+    draw();
+  })();
+
+  /* 往下捲收起導覽列 */
+  (function () {
+    const bar = document.querySelector(".topbar");
+    if (!bar) return;
+    const root = document.documentElement;
+    let last = scrollY, hid = false, tick = false;
+    const setH = () => root.style.setProperty("--hdr", (hid ? 0 : bar.offsetHeight) + "px");
+    setH();
+    const on = () => {
+      if (tick) return; tick = true;
+      requestAnimationFrame(() => {
+        tick = false;
+        const y = scrollY;
+        if (document.querySelector(".show.open") || lb.classList.contains("open")) { last = y; return; }
+        if (y > last + 6 && y > 320 && !hid) { hid = true; root.classList.add("nav-hide"); setH(); }
+        else if ((y < last - 6 || y < 160) && hid) { hid = false; root.classList.remove("nav-hide"); setH(); }
+        last = y;
+      });
+    };
+    addEventListener("scroll", on, { passive: true });
+    addEventListener("resize", setH);
+  })();
 
   /* ===== 簡報模式 ===== */
   const foot = n => `<div class="s-foot"><span><img src="assets/logo-tfai.png" alt="">2026 新加坡師培學術參訪・數位科技轉化大學師培課程培訓計畫</span><span>${n}</span></div>`;
@@ -1144,7 +1266,7 @@ footer p.org b { margin-right: 8px; }
       else if (e.key === "f" || e.key === "F") full();
       else if (e.key === "Escape" && !document.fullscreenElement) closeShow();
     } else if (lb.classList.contains("open")) {
-      if (e.key === "Escape") lb.classList.remove("open");
+      if (e.key === "Escape") closeLb();
       else if (e.key === "ArrowRight") lbShow(li + 1);
       else if (e.key === "ArrowLeft") lbShow(li - 1);
     }
